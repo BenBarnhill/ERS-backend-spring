@@ -52,8 +52,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public UserPojo updateInfo(UserPojo userPojo) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<EmployeeEntity> optional = empDao.findById(userPojo.getUserId());
+		UserPojo updatedPojo = null;
+		if(optional.isPresent()) {
+			EmployeeEntity empEntity = optional.get();
+			empEntity.setEmpPassword(userPojo.getUserPassword());
+			empEntity.setEmpFirstName(userPojo.getUserFirstName());
+			empEntity.setEmpLastName(userPojo.getUserLastName());
+			empEntity.setEmpContact(userPojo.getUserContact());
+			empEntity.setEmpEmail(userPojo.getUserEmail());
+			empEntity.setEmpAddress(userPojo.getUserAddress());
+			empDao.save(empEntity);
+			
+			updatedPojo = new UserPojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
+		}
+		return updatedPojo;
 	}
 
 }
