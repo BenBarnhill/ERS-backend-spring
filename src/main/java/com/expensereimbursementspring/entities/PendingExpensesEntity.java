@@ -1,6 +1,7 @@
 package com.expensereimbursementspring.entities;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenerationTime;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -34,9 +38,10 @@ public class PendingExpensesEntity {
 	@Column(name = "pend_reason")
 	private String pendReason;
 	
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "pend_request_time")
-	private Timestamp pendCreated;
+	private Date pendCreated;
 	
 	@Column(name = "pend_resolve_time")
 	private String pendResolved;
@@ -45,7 +50,6 @@ public class PendingExpensesEntity {
 	@JoinColumn(name = "pend_response")
 	private AdminEntity pendAdmin;
 	
-	@Value(value = "PENDING")
 	@Column(name = "pend_status")
 	private String pendStatus;
 
@@ -55,7 +59,7 @@ public class PendingExpensesEntity {
 	}
 
 	public PendingExpensesEntity(int pendId, EmployeeEntity pendEmp, double pendAmount, String pendReason,
-			Timestamp pendCreated, String pendResolved, AdminEntity pendAdmin, String pendStatus) {
+			Date pendCreated, String pendResolved, AdminEntity pendAdmin, String pendStatus) {
 		super();
 		this.pendId = pendId;
 		this.pendEmp = pendEmp;
@@ -99,11 +103,11 @@ public class PendingExpensesEntity {
 		this.pendReason = pendReason;
 	}
 
-	public Timestamp getPendCreated() {
+	public Date getPendCreated() {
 		return pendCreated;
 	}
 
-	public void setPendCreated(Timestamp pendCreated) {
+	public void setPendCreated(Date pendCreated) {
 		this.pendCreated = pendCreated;
 	}
 
@@ -137,6 +141,8 @@ public class PendingExpensesEntity {
 				+ ", pendReason=" + pendReason + ", pendCreated=" + pendCreated + ", pendResolved=" + pendResolved
 				+ ", pendAdmin=" + pendAdmin + ", pendStatus=" + pendStatus + "]";
 	}
+
+	
 	
 
 }

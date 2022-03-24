@@ -1,6 +1,7 @@
 package com.expensereimbursementspring.pojo;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class FinalExpensesPojo {
 
@@ -9,7 +10,7 @@ public class FinalExpensesPojo {
 	private double finalAmount;
 	private String finalReason;
 	private String finalCreated;
-	private Timestamp finalResolved;
+	private Date finalResolved;
 	private int finalResponse;
 	private String finalStatus;
 	
@@ -19,7 +20,7 @@ public class FinalExpensesPojo {
 	}
 
 	public FinalExpensesPojo(int finalId, int finalRequest, double finalAmount, String finalReason, String finalCreated,
-			Timestamp finalResolved, int finalResponse, String finalStatus) {
+			Date finalResolved, int finalResponse, String finalStatus) {
 		super();
 		this.finalId = finalId;
 		this.finalRequest = finalRequest;
@@ -71,11 +72,11 @@ public class FinalExpensesPojo {
 		this.finalCreated = finalCreated;
 	}
 
-	public Timestamp getFinalResolved() {
+	public Date getFinalResolved() {
 		return finalResolved;
 	}
 
-	public void setFinalResolved(Timestamp finalResolved) {
+	public void setFinalResolved(Date finalResolved) {
 		this.finalResolved = finalResolved;
 	}
 
@@ -101,4 +102,5 @@ public class FinalExpensesPojo {
 				+ finalAmount + ", finalReason=" + finalReason + ", finalCreated=" + finalCreated + ", finalResolved="
 				+ finalResolved + ", finalResponse=" + finalResponse + ", finalStatus=" + finalStatus + "]";
 	}
+	
 }

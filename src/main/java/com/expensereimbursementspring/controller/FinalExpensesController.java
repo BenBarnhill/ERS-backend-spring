@@ -41,8 +41,8 @@ public class FinalExpensesController {
 	}
 	
 	@GetMapping("/{eid}")
-	List<ExpensePojo> fetchEmployeeFinalExpenses(@PathVariable int empId){
-		return finalService.fetchEmployeeFinalExpenses(empId);
+	List<ExpensePojo> fetchEmployeeFinalExpenses(@PathVariable int eid){
+		return finalService.fetchEmployeeFinalExpenses(eid);
 	}
 	
 

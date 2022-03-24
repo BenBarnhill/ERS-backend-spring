@@ -1,6 +1,7 @@
 package com.expensereimbursementspring.entities;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.tuple.GenerationTiming;
 
@@ -35,9 +39,10 @@ public class FinalExpensesEntity {
 	@Column(name="final_request_time")
 	private String finalRequest;
 	
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="final_resolve_time")
-	private Timestamp finalResolved;
+	private Date finalResolved;
 	
 	@ManyToOne
 	@JoinColumn(name="final_response")
@@ -52,7 +57,7 @@ public class FinalExpensesEntity {
 	}
 
 	public FinalExpensesEntity(int finalId, EmployeeEntity finalEmp, double finalAmount, String finalReason,
-			String finalRequest, Timestamp finalResolved, AdminEntity finalAdmin, String finalStatus) {
+			String finalRequest, Date finalResolved, AdminEntity finalAdmin, String finalStatus) {
 		super();
 		this.finalId = finalId;
 		this.finalEmp = finalEmp;
@@ -104,11 +109,11 @@ public class FinalExpensesEntity {
 		this.finalRequest = finalRequest;
 	}
 
-	public Timestamp getFinalResolved() {
+	public Date getFinalResolved() {
 		return finalResolved;
 	}
 
-	public void setFinalResolved(Timestamp finalResolved) {
+	public void setFinalResolved(Date finalResolved) {
 		this.finalResolved = finalResolved;
 	}
 
@@ -134,7 +139,6 @@ public class FinalExpensesEntity {
 				+ ", finalReason=" + finalReason + ", finalRequest=" + finalRequest + ", finalResolved=" + finalResolved
 				+ ", finalAdmin=" + finalAdmin + ", finalStatus=" + finalStatus + "]";
 	}
-
 	
 
 	

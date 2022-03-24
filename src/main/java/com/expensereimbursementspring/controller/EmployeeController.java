@@ -28,7 +28,7 @@ public class EmployeeController {
 		return empService.fetchEmployee(eid);
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/")
 	EmployeePojo loginEmployee(@RequestBody EmployeePojo pojoIn) {
 		return empService.loginEmployee(pojoIn);
 	}

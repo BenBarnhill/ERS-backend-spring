@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,8 @@ public class AdminController {
 	AdminService adminService;
 	
 	@GetMapping("/{aid}")
-	AdminPojo fetchAdmin(int adminId) {
-		return adminService.fetchAdmin(adminId);
+	AdminPojo fetchAdmin(@PathVariable int aid) {
+		return adminService.fetchAdmin(aid);
 	}
 	
 	@PostMapping("/login")

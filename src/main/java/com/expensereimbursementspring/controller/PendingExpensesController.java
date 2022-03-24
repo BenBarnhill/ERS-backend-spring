@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,13 +34,18 @@ public class PendingExpensesController {
 	}
 	
 	@GetMapping("/pendings/{eid}")
-	List<ExpensePojo> fetchEmployeePendingExpenses(@PathVariable int empId){
-		return pendService.fetchEmployeePendingExpenses(empId);
+	List<ExpensePojo> fetchEmployeePendingExpenses(@PathVariable int eid){
+		return pendService.fetchEmployeePendingExpenses(eid);
 	}
 	
 	@GetMapping("/amounts")
 	long pendingAmount() {
 		return pendService.pendingAmount();
+	}
+	
+	@PostMapping("/submit")
+	PendingExpensesPojo  submitRequest(@RequestBody PendingExpensesPojo pendPojo) {
+		return pendService.submitRequest(pendPojo);
 	}
 	
 	

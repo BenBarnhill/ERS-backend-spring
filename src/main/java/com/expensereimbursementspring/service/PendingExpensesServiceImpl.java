@@ -76,7 +76,7 @@ public class PendingExpensesServiceImpl implements PendingExpensesService {
 			Optional<AdminEntity> optional2 = adminDao.findById(1);
 			if(optional2.isPresent()) {
 				AdminEntity adminEntity = optional2.get();
-				PendingExpensesEntity pendEntity = new PendingExpensesEntity(pendPojo.getPendingId(), empEntity, pendPojo.getPendingAmount(), pendPojo.getPendingReason(), null, pendPojo.getPendingResolved(), adminEntity, pendPojo.getPendingStatus());
+				PendingExpensesEntity pendEntity = new PendingExpensesEntity(pendPojo.getPendingId(), empEntity, pendPojo.getPendingAmount(), pendPojo.getPendingReason(), null, pendPojo.getPendingResolved(), adminEntity, "PENDING");
 				pendDao.saveAndFlush(pendEntity);
 				submitPojo = new PendingExpensesPojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpId(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated().toString(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminId(), pendEntity.getPendStatus());
 			}
