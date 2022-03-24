@@ -2,16 +2,18 @@ package com.expensereimbursementspring.service;
 
 import java.util.List;
 
+import com.expensereimbursementspring.pojo.EmployeePojo;
 import com.expensereimbursementspring.pojo.UserPojo;
+
 
 public interface EmployeeService {
 	
-	UserPojo fetchEmployee(int empId);
+	EmployeePojo fetchEmployee(int empId);
 	
-	UserPojo loginEmployee(UserPojo userIn);
+	EmployeePojo loginEmployee(EmployeePojo pojoIn);
 	
-	List<UserPojo> fetchAllEmployees();
+	List<EmployeePojo> fetchAllEmployees();
 	
-	UserPojo updateInfo(UserPojo userPojo);
+	EmployeePojo updateInfo(EmployeePojo pojoIn);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.expensereimbursementspring.dao.EmployeeDao;
 import com.expensereimbursementspring.entities.EmployeeEntity;
+import com.expensereimbursementspring.pojo.EmployeePojo;
 import com.expensereimbursementspring.pojo.UserPojo;
 
 @Service
@@ -18,53 +19,53 @@ public class EmployeeServiceImpl implements EmployeeService {
 	EmployeeDao empDao;
 
 	@Override
-	public UserPojo fetchEmployee(int empId) {
+	public EmployeePojo fetchEmployee(int empId) {
 		Optional<EmployeeEntity> optional = empDao.findById(empId);
-		UserPojo userPojo = null;
+		EmployeePojo empPojo = null;
 		if(optional.isPresent()) {
 			EmployeeEntity empEntity = optional.get();
-			userPojo = new UserPojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
+			empPojo = new EmployeePojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
 		}
-		return userPojo;
+		return empPojo;
 	}
 
 	@Override
-	public UserPojo loginEmployee(UserPojo userIn) {
-		UserPojo loginPojo = new UserPojo(0, "","","",0,"","","");
-		EmployeeEntity empEntity = empDao.findEmployeeByEmail(userIn.getUserEmail());
-		UserPojo fetchedPojo = new UserPojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
-		if(fetchedPojo.getUserPassword().equals(userIn.getUserPassword())) {
+	public EmployeePojo loginEmployee(EmployeePojo pojoIn) {
+		EmployeePojo loginPojo = new EmployeePojo(0, "","","",0,"","","");
+		EmployeeEntity empEntity = empDao.findEmployeeByEmail(pojoIn.getEmpEmail());
+		EmployeePojo fetchedPojo = new EmployeePojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
+		if(fetchedPojo.getEmpPassword().equals(pojoIn.getEmpPassword())) {
 			loginPojo = fetchedPojo;
 		}
 		return loginPojo;
 	}
 
 	@Override
-	public List<UserPojo> fetchAllEmployees() {
-		List<UserPojo> allUserPojos = new ArrayList<UserPojo>();
+	public List<EmployeePojo> fetchAllEmployees() {
+		List<EmployeePojo> allEmpPojos = new ArrayList<EmployeePojo>();
 		List<EmployeeEntity> allEmployeeEntities = empDao.findAll();
 		for(EmployeeEntity empEntity: allEmployeeEntities) {
-			UserPojo userPojo = new UserPojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
-			allUserPojos.add(userPojo);
+			EmployeePojo empPojo = new EmployeePojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
+			allEmpPojos.add(empPojo);
 		}
-		return allUserPojos;
+		return allEmpPojos;
 	}
 
 	@Override
-	public UserPojo updateInfo(UserPojo userPojo) {
-		Optional<EmployeeEntity> optional = empDao.findById(userPojo.getUserId());
-		UserPojo updatedPojo = null;
+	public EmployeePojo updateInfo(EmployeePojo userPojo) {
+		Optional<EmployeeEntity> optional = empDao.findById(userPojo.getEmpId());
+		EmployeePojo updatedPojo = null;
 		if(optional.isPresent()) {
 			EmployeeEntity empEntity = optional.get();
-			empEntity.setEmpPassword(userPojo.getUserPassword());
-			empEntity.setEmpFirstName(userPojo.getUserFirstName());
-			empEntity.setEmpLastName(userPojo.getUserLastName());
-			empEntity.setEmpContact(userPojo.getUserContact());
-			empEntity.setEmpEmail(userPojo.getUserEmail());
-			empEntity.setEmpAddress(userPojo.getUserAddress());
-			empDao.save(empEntity);
+			empEntity.setEmpPassword(userPojo.getEmpPassword());
+			empEntity.setEmpFirstName(userPojo.getEmpFirstName());
+			empEntity.setEmpLastName(userPojo.getEmpLastName());
+			empEntity.setEmpContact(userPojo.getEmpContact());
+			empEntity.setEmpEmail(userPojo.getEmpEmail());
+			empEntity.setEmpAddress(userPojo.getEmpAddress());
+			empDao.saveAndFlush(empEntity);
 			
-			updatedPojo = new UserPojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
+			updatedPojo = new EmployeePojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
 		}
 		return updatedPojo;
 	}

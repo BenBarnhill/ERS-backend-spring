@@ -134,9 +134,9 @@ public class FinalExpensesEntity {
 				+ ", finalReason=" + finalReason + ", finalRequest=" + finalRequest + ", finalResolved=" + finalResolved
 				+ ", finalAdmin=" + finalAdmin + ", finalStatus=" + finalStatus + "]";
 	}
+
 	
-	
-	
+
 	
 
 }

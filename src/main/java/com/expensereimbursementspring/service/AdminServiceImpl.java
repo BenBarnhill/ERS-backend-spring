@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.expensereimbursementspring.dao.AdminDao;
 import com.expensereimbursementspring.entities.AdminEntity;
+import com.expensereimbursementspring.pojo.AdminPojo;
 import com.expensereimbursementspring.pojo.UserPojo;
 
 @Service
@@ -16,23 +17,23 @@ public class AdminServiceImpl implements AdminService {
 	AdminDao adminDao;
 
 	@Override
-	public UserPojo fetchAdmin(int adminId) {
+	public AdminPojo fetchAdmin(int adminId) {
 		Optional<AdminEntity> optional = adminDao.findById(adminId);
-		UserPojo userPojo = null;
+		AdminPojo adminPojo = null;
 		if(optional.isPresent()) {
 			AdminEntity adminEntity = optional.get();
-			userPojo = new UserPojo(adminEntity.getAdminId(), adminEntity.getAdminPassword(), adminEntity.getAdminFirstName(), adminEntity.getAdminLastName(), adminEntity.getAdminContact(), adminEntity.getAdminEmail(), adminEntity.getAdminAddress(), adminEntity.getAdminRole());
+			adminPojo = new AdminPojo(adminEntity.getAdminId(), adminEntity.getAdminPassword(), adminEntity.getAdminFirstName(), adminEntity.getAdminLastName(), adminEntity.getAdminContact(), adminEntity.getAdminEmail(), adminEntity.getAdminAddress(), adminEntity.getAdminRole());
 		}
-		return userPojo;
+		return adminPojo;
 		
 	}
 
 	@Override
-	public UserPojo loginAdmin(UserPojo userIn) {
-		UserPojo loginPojo = new UserPojo(0, "","","",0,"","","");
-		AdminEntity adminEntity = adminDao.findAdminByEmail(userIn.getUserEmail());
-		UserPojo fetchedPojo = new UserPojo(adminEntity.getAdminId(), adminEntity.getAdminPassword(), adminEntity.getAdminFirstName(), adminEntity.getAdminLastName(), adminEntity.getAdminContact(), adminEntity.getAdminEmail(), adminEntity.getAdminAddress(), adminEntity.getAdminRole());
-		if(fetchedPojo.getUserPassword().equals(userIn.getUserPassword())) {
+	public AdminPojo loginAdmin(AdminPojo pojoIn) {
+		AdminPojo loginPojo = new AdminPojo(0, "","","",0,"","","");
+		AdminEntity adminEntity = adminDao.findAdminByEmail(pojoIn.getAdminEmail());
+		AdminPojo fetchedPojo = new AdminPojo(adminEntity.getAdminId(), adminEntity.getAdminPassword(), adminEntity.getAdminFirstName(), adminEntity.getAdminLastName(), adminEntity.getAdminContact(), adminEntity.getAdminEmail(), adminEntity.getAdminAddress(), adminEntity.getAdminRole());
+		if(fetchedPojo.getAdminPassword().equals(pojoIn.getAdminPassword())) {
 			loginPojo = fetchedPojo;
 		}
 		return loginPojo;

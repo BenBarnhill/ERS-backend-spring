@@ -1,11 +1,14 @@
 package com.expensereimbursementspring.service;
 
+import com.expensereimbursementspring.pojo.AdminPojo;
 import com.expensereimbursementspring.pojo.UserPojo;
+
+
 
 public interface AdminService {
 	
-	UserPojo fetchAdmin(int adminId);
+	AdminPojo fetchAdmin(int adminId);
 	
-	UserPojo loginAdmin(UserPojo userIn);
+	AdminPojo loginAdmin(AdminPojo pojoIn);
 
 }

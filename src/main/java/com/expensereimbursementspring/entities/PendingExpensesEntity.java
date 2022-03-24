@@ -132,12 +132,9 @@ public class PendingExpensesEntity {
 	@Override
 	public String toString() {
 		return "PendingExpensesEntity [pendId=" + pendId + ", pendEmp=" + pendEmp + ", pendAmount=" + pendAmount
-				+ ", pendReason=" + pendReason + ", pendCreated=" + pendCreated + ", pendResolved=" + pendResolved
-				+ ", pendAdmin=" + pendAdmin + ", pendStatus=" + pendStatus + "]";
+				+ ", pendReason=" + pendReason + ", pendCreated=" + pendCreated
+				+ ", pendResolved=" + pendResolved + ", pendAdmin=" + pendAdmin + ", pendStatus=" + pendStatus + "]";
 	}
-
-	
-	
 	
 
 }
