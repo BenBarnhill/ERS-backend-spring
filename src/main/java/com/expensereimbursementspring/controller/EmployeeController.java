@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.expensereimbursementspring.pojo.EmployeePojo;
 import com.expensereimbursementspring.service.EmployeeService;
 
-@Controller
-@CrossOrigin("http://ec2-54-227-229-86.compute-1.amazonaws.com:9999")
+@RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
 	

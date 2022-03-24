@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.expensereimbursementspring.pojo.ExpensePojo;
 import com.expensereimbursementspring.pojo.PendingExpensesPojo;
 import com.expensereimbursementspring.service.PendingExpensesService;
 
-@Controller
-@CrossOrigin("http://ec2-54-227-229-86.compute-1.amazonaws.com:9999")
+@RestController
 @RequestMapping("/api")
 public class PendingExpensesController {
 	

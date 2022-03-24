@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public EmployeePojo loginEmployee(EmployeePojo pojoIn) {
 		EmployeePojo loginPojo = new EmployeePojo(0, "","","",0,"","","");
-		EmployeeEntity empEntity = empDao.findEmployeeByEmail(pojoIn.getEmpEmail());
+		EmployeeEntity empEntity = empDao.findByEmpEmail(pojoIn.getEmpEmail());
 		EmployeePojo fetchedPojo = new EmployeePojo(empEntity.getEmpId(), empEntity.getEmpPassword(), empEntity.getEmpFirstName(), empEntity.getEmpLastName(), empEntity.getEmpContact(), empEntity.getEmpEmail(), empEntity.getEmpAddress(), empEntity.getEmpRole());
 		if(fetchedPojo.getEmpPassword().equals(pojoIn.getEmpPassword())) {
 			loginPojo = fetchedPojo;

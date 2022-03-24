@@ -1,5 +1,7 @@
 package com.expensereimbursementspring.entities;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -34,7 +36,7 @@ public class PendingExpensesEntity {
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "pend_request_time")
-	private String pendCreated;
+	private Timestamp pendCreated;
 	
 	@Column(name = "pend_resolve_time")
 	private String pendResolved;
@@ -53,7 +55,7 @@ public class PendingExpensesEntity {
 	}
 
 	public PendingExpensesEntity(int pendId, EmployeeEntity pendEmp, double pendAmount, String pendReason,
-			String pendCreated, String pendResolved, AdminEntity pendAdmin, String pendStatus) {
+			Timestamp pendCreated, String pendResolved, AdminEntity pendAdmin, String pendStatus) {
 		super();
 		this.pendId = pendId;
 		this.pendEmp = pendEmp;
@@ -97,11 +99,11 @@ public class PendingExpensesEntity {
 		this.pendReason = pendReason;
 	}
 
-	public String getPendCreated() {
+	public Timestamp getPendCreated() {
 		return pendCreated;
 	}
 
-	public void setPendCreated(String pendCreated) {
+	public void setPendCreated(Timestamp pendCreated) {
 		this.pendCreated = pendCreated;
 	}
 
@@ -132,8 +134,8 @@ public class PendingExpensesEntity {
 	@Override
 	public String toString() {
 		return "PendingExpensesEntity [pendId=" + pendId + ", pendEmp=" + pendEmp + ", pendAmount=" + pendAmount
-				+ ", pendReason=" + pendReason + ", pendCreated=" + pendCreated
-				+ ", pendResolved=" + pendResolved + ", pendAdmin=" + pendAdmin + ", pendStatus=" + pendStatus + "]";
+				+ ", pendReason=" + pendReason + ", pendCreated=" + pendCreated + ", pendResolved=" + pendResolved
+				+ ", pendAdmin=" + pendAdmin + ", pendStatus=" + pendStatus + "]";
 	}
 	
 

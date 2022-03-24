@@ -31,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public AdminPojo loginAdmin(AdminPojo pojoIn) {
 		AdminPojo loginPojo = new AdminPojo(0, "","","",0,"","","");
-		AdminEntity adminEntity = adminDao.findAdminByEmail(pojoIn.getAdminEmail());
+		AdminEntity adminEntity = adminDao.findByAdminEmail(pojoIn.getAdminEmail());
 		AdminPojo fetchedPojo = new AdminPojo(adminEntity.getAdminId(), adminEntity.getAdminPassword(), adminEntity.getAdminFirstName(), adminEntity.getAdminLastName(), adminEntity.getAdminContact(), adminEntity.getAdminEmail(), adminEntity.getAdminAddress(), adminEntity.getAdminRole());
 		if(fetchedPojo.getAdminPassword().equals(pojoIn.getAdminPassword())) {
 			loginPojo = fetchedPojo;

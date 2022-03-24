@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.expensereimbursementspring.pojo.ExpensePojo;
 import com.expensereimbursementspring.pojo.FinalExpensesPojo;
 import com.expensereimbursementspring.pojo.PendingExpensesPojo;
 import com.expensereimbursementspring.service.FinalExpensesService;
 
-@Controller
-@CrossOrigin("http://ec2-54-227-229-86.compute-1.amazonaws.com:9999")
+@RestController
 @RequestMapping("api/resolutions")
 public class FinalExpensesController {
 	

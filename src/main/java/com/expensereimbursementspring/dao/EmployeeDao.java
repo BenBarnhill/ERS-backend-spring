@@ -9,5 +9,5 @@ import com.expensereimbursementspring.entities.EmployeeEntity;
 public interface EmployeeDao extends JpaRepository<EmployeeEntity, Integer>{
 
 	// SELECT * FROM employee_details WHERE emp_email=userEmail;
-	EmployeeEntity findEmployeeByEmail(String empEmail);
+	EmployeeEntity findByEmpEmail(String empEmail);
 }

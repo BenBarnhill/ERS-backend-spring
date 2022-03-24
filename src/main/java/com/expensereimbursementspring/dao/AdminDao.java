@@ -9,5 +9,5 @@ import com.expensereimbursementspring.entities.AdminEntity;
 public interface AdminDao extends JpaRepository<AdminEntity, Integer> {
 
 	// SELECT * FROM admin_details where admin_email=userEmail;
-	AdminEntity findAdminByEmail(String userEmail);
+	AdminEntity findByAdminEmail(String userEmail);
 }

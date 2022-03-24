@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.expensereimbursementspring.pojo.AdminPojo;
 import com.expensereimbursementspring.service.AdminService;
 
-@Controller
-@CrossOrigin("http://ec2-54-227-229-86.compute-1.amazonaws.com:9999")
+@RestController
 @RequestMapping("/api/admins")
 public class AdminController {
 

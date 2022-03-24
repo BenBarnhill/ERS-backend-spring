@@ -35,7 +35,7 @@ public class PendingExpensesServiceImpl implements PendingExpensesService {
 		PendingExpensesPojo pendPojo = null;
 		if(optional.isPresent()) {
 			PendingExpensesEntity pendEntity = optional.get();
-			pendPojo = new PendingExpensesPojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpId(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminId(), pendEntity.getPendStatus());
+			pendPojo = new PendingExpensesPojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpId(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated().toString(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminId(), pendEntity.getPendStatus());
 		}
 		return pendPojo;
 	}
@@ -45,7 +45,7 @@ public class PendingExpensesServiceImpl implements PendingExpensesService {
 		List<ExpensePojo> allPendExpenses = new ArrayList<ExpensePojo>();
 		List<PendingExpensesEntity> allPendEntities = pendDao.findAll();
 		for(PendingExpensesEntity pendEntity: allPendEntities) {
-			ExpensePojo pendPojo = new ExpensePojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpFirstName(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminFirstName(), pendEntity.getPendStatus());
+			ExpensePojo pendPojo = new ExpensePojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpFirstName(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated().toString(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminFirstName(), pendEntity.getPendStatus());
 			allPendExpenses.add(pendPojo);
 		}
 		return allPendExpenses;
@@ -54,9 +54,14 @@ public class PendingExpensesServiceImpl implements PendingExpensesService {
 	@Override
 	public List<ExpensePojo> fetchEmployeePendingExpenses(int empId) {
 		List<ExpensePojo> allPendExpenses = new ArrayList<ExpensePojo>();
-		List<PendingExpensesEntity> allEmpPendEntities = pendDao.findByEmpId(empId);
+		Optional<EmployeeEntity> optional = empDao.findById(empId);
+		EmployeeEntity empEntity = null;
+		if(optional.isPresent()) {
+			empEntity = optional.get();
+		}
+		List<PendingExpensesEntity> allEmpPendEntities = pendDao.findByPendEmp(empEntity);
 		for(PendingExpensesEntity pendEntity: allEmpPendEntities) {
-			ExpensePojo pendPojo = new ExpensePojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpFirstName(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminFirstName(), pendEntity.getPendStatus());
+			ExpensePojo pendPojo = new ExpensePojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpFirstName(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated().toString(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminFirstName(), pendEntity.getPendStatus());
 			allPendExpenses.add(pendPojo);
 		}
 		return allPendExpenses;
@@ -71,9 +76,9 @@ public class PendingExpensesServiceImpl implements PendingExpensesService {
 			Optional<AdminEntity> optional2 = adminDao.findById(1);
 			if(optional2.isPresent()) {
 				AdminEntity adminEntity = optional2.get();
-				PendingExpensesEntity pendEntity = new PendingExpensesEntity(pendPojo.getPendingId(), empEntity, pendPojo.getPendingAmount(), pendPojo.getPendingReason(), pendPojo.getPendingCreated(), pendPojo.getPendingResolved(), adminEntity, pendPojo.getPendingStatus());
+				PendingExpensesEntity pendEntity = new PendingExpensesEntity(pendPojo.getPendingId(), empEntity, pendPojo.getPendingAmount(), pendPojo.getPendingReason(), null, pendPojo.getPendingResolved(), adminEntity, pendPojo.getPendingStatus());
 				pendDao.saveAndFlush(pendEntity);
-				submitPojo = new PendingExpensesPojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpId(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminId(), pendEntity.getPendStatus());
+				submitPojo = new PendingExpensesPojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpId(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated().toString(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminId(), pendEntity.getPendStatus());
 			}
 			
 		}
