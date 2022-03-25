@@ -13,11 +13,8 @@ pipeline {
         stage('build code') {
             steps {
                 // Run Maven on a Unix agent.
-                withMaven(
-                	maven: 'springversion'
-                ){
-                	sh "mvn clean package -DskipTests"
-                }
+                sh "mvn clean package -DskipTests"
+                
                 echo 'build step'
             }
         }
