@@ -16,9 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.expensereimbursementspring.pojo.FilePojo;
 import com.expensereimbursementspring.service.FileService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/files")
+@Slf4j
 public class FileController {
 
 	@Autowired
@@ -26,16 +29,19 @@ public class FileController {
 	
 	@PostMapping("/")
 	FilePojo store(@RequestParam("file") MultipartFile file) throws IOException{
+		log.info("Entered store of FileController");
 		return fileService.store(file);
 	}
 	
 	@GetMapping("/{fid}")
 	FilePojo getFile(@PathVariable int fid) {
+		log.info("Entered getFile of FileController");
 		return fileService.getFile(fid);
 	}
 	
 	@GetMapping("/")
 	List<FilePojo> getAllFiles(){
+		log.info("Entered getAllFiles of FileController");
 		return fileService.getAllFiles();
 	}
 	

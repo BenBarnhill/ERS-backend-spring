@@ -5,18 +5,28 @@ pipeline {
         stage('clone code') {
             steps {
                 // Get some code from a GitHub repository
-                git (url: 'https://github.com/BenBarnhill/ERS-backend.git', branch:'main')
+                git (url: 'https://github.com/BenBarnhill/ERS-backend-spring.git', branch:'main')
+                
+                echo 'clone step'
             }
         }
         stage('build code') {
             steps {
                 // Run Maven on a Unix agent.
-                sh "mvn clean package"
+                withMaven(
+                	maven: 'springversion'
+                ){
+                	sh "mvn clean package -DskipTests"
+                }
+                echo 'build step'
             }
         }
         stage('staging') {
             steps {
-               sh "docker-compose down"    
+            	echo 'deploy step'
+            	
+               sh "docker-compose down"
+                   
                sh "docker-compose up -d"
             }
         }

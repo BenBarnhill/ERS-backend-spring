@@ -16,36 +16,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.expensereimbursementspring.exceptions.SystemException;
 import com.expensereimbursementspring.pojo.EmployeePojo;
 import com.expensereimbursementspring.service.EmployeeService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api/employees")
+@Slf4j
 public class EmployeeController {
 	
 	@Autowired
 	EmployeeService empService;
 	
 	@GetMapping("/{eid}")
-	EmployeePojo fetchEmployee(@PathVariable int eid) {
+	EmployeePojo fetchEmployee(@PathVariable int eid) throws SystemException{
+		log.info("Entered fetchEmployee of EmployeeController");
 		return empService.fetchEmployee(eid);
 	}
 	
 	@RequestMapping(method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	EmployeePojo loginEmployee(@RequestBody EmployeePojo pojoIn) {
+	EmployeePojo loginEmployee(@RequestBody EmployeePojo pojoIn) throws SystemException{
+		log.info("Entered loginEmployee of EmployeeController");
 		return empService.loginEmployee(pojoIn);
 	}
 	
 	@GetMapping("/")
-	List<EmployeePojo> fetchAllEmployees(){
+	List<EmployeePojo> fetchAllEmployees() throws SystemException{
+		log.info("Entered fetchAllEmployees of EmployeeController");
 		return empService.fetchAllEmployees();
 	}
 	
 	@RequestMapping(method= RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	EmployeePojo updateInfo(@RequestBody EmployeePojo pojoIn) {
+	EmployeePojo updateInfo(@RequestBody EmployeePojo pojoIn) throws SystemException{
+		log.info("Entered updateInfo of EmployeeController");
 		return empService.updateInfo(pojoIn);
 	}
 
