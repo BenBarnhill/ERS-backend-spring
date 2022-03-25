@@ -92,4 +92,25 @@ public class FinalExpensesServiceImpl implements FinalExpensesService {
 		return allFinalExpenses;
 	}
 
+	@Override
+	public List<ExpensePojo> fetchAllEmployeeExpenses(int empId) {
+		List<ExpensePojo> allEmployeeExpenses = new ArrayList<ExpensePojo>();
+		Optional<EmployeeEntity> optional = empDao.findById(empId);
+		EmployeeEntity empEntity = null;
+		if(optional.isPresent()) {
+			empEntity = optional.get();
+		}
+		List<PendingExpensesEntity> allEmpPendingEntities = pendDao.findByPendEmp(empEntity);
+		for(PendingExpensesEntity pendEntity: allEmpPendingEntities) {
+			ExpensePojo pendPojo = new ExpensePojo(pendEntity.getPendId(), pendEntity.getPendEmp().getEmpFirstName(), pendEntity.getPendAmount(), pendEntity.getPendReason(), pendEntity.getPendCreated().toString(), pendEntity.getPendResolved(), pendEntity.getPendAdmin().getAdminFirstName(), pendEntity.getPendStatus());
+			allEmployeeExpenses.add(pendPojo);
+		}
+		List<FinalExpensesEntity> allEmpFinalEntities = finalDao.findByFinalEmp(empEntity);
+		for(FinalExpensesEntity finalEntity: allEmpFinalEntities) {
+			ExpensePojo finalPojo = new ExpensePojo(finalEntity.getFinalId(), finalEntity.getFinalEmp().getEmpFirstName(), finalEntity.getFinalAmount(), finalEntity.getFinalReason(), finalEntity.getFinalRequest(), finalEntity.getFinalResolved().toString(), finalEntity.getFinalAdmin().getAdminFirstName(), finalEntity.getFinalStatus());
+			allEmployeeExpenses.add(finalPojo);
+		}
+		return allEmployeeExpenses;
+	}
+
 }

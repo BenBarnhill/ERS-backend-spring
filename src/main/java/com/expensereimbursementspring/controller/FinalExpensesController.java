@@ -19,6 +19,7 @@ import com.expensereimbursementspring.pojo.PendingExpensesPojo;
 import com.expensereimbursementspring.service.FinalExpensesService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/resolutions")
 public class FinalExpensesController {
 	
@@ -40,9 +41,14 @@ public class FinalExpensesController {
 		return finalService.denyExpense(pendPojo);
 	}
 	
-	@GetMapping("/{eid}")
+	@GetMapping("/final/{eid}")
 	List<ExpensePojo> fetchEmployeeFinalExpenses(@PathVariable int eid){
 		return finalService.fetchEmployeeFinalExpenses(eid);
+	}
+	
+	@GetMapping("/all/{eid}")
+	List<ExpensePojo> fetchAllEmployeeExpenses(@PathVariable int eid){
+		return finalService.fetchAllEmployeeExpenses(eid);
 	}
 	
 

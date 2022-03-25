@@ -15,4 +15,6 @@ public interface FinalExpensesService {
 	FinalExpensesPojo denyExpense(PendingExpensesPojo pendPojo);
 	
 	List<ExpensePojo> fetchEmployeeFinalExpenses(int empId);
+	
+	List<ExpensePojo> fetchAllEmployeeExpenses(int empId);
 }
