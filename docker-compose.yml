@@ -8,24 +8,12 @@ services:
       - POSTGRES_PASSWORD=mysecretpassword
     volumes:
       - ./dbscript.sql:/docker-entrypoint-initdb.d/create_tables.sql
-  app:
-    depends_on:
-      - postgres
-    build: ./expense-reimbursement-spring
-    restart: on-failure
-    #env_file: ./.env
+  spring-backend-service:
+    image: spring-backend
+    build: .
     ports:
-      - 4444:9999
-    environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:postgres://mysqldb:5432/project2",
-        "spring.datasource.username" : "postgres",
-        "spring.datasource.password" : "password",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"}'
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-volumes:
-  db:
+      - 9999:4040
+    depends_on:
+      - my-postgres
+    links:
+      - my-postgres
