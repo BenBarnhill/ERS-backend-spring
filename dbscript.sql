@@ -66,3 +66,9 @@ final_status varchar(20),
 PRIMARY KEY(final_id), 
 CONSTRAINT fk_empId FOREIGN KEY(final_request) REFERENCES employee_details(emp_id) ON DELETE NO ACTION, 
 CONSTRAINT fk_adminId FOREIGN KEY(final_response) REFERENCES admin_details(admin_id) ON DELETE NO ACTION);
+
+CREATE TABLE files(file_id int GENERATED ALWAYS AS IDENTITY, 
+file_name varchar(100), 
+file_type varchar(20), 
+file_type bytea, 
+PRIMARY KEY(file_id));
