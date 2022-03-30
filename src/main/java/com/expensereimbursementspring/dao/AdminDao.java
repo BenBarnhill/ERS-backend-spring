@@ -10,4 +10,7 @@ public interface AdminDao extends JpaRepository<AdminEntity, Integer> {
 
 	// SELECT * FROM admin_details where admin_email=userEmail;
 	AdminEntity findByAdminEmail(String userEmail);
+	
+	
+	
 }
