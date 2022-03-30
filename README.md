@@ -1,7 +1,7 @@
 # Expense Reimbursement System
 
 ## Project Description
-This project is an extension of the previous Expense Reimbursement System with added functionalities, technologies, and microservices. In addition to submitting reimbursement requests, as they could before, the employees will now also be able to upload an image file as proof of their expenditure which can later be viewed by the admins when approving or denying a request. The framework used for this project was changed from Javalin to Spring Boot and microservices such as Jenkins, AWS, and Docker were used to host publicly deploy the backend and frontend. 
+This project is an extension of the previous Expense Reimbursement System with added functionalities, technologies, and microservices. In addition to submitting reimbursement requests, as they could before, the employees will now also be able to upload an image file as proof of their expenditure which can later be viewed by the admins when approving or denying a request. The framework used for this project was changed from Javalin to Spring Boot and microservices such as Jenkins, AWS, and Docker were used to host and publicly deploy the backend and frontend. 
 
 ## Features
 - As an employee, a user can:
